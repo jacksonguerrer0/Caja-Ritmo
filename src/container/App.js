@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Button } from 'react-bootstrap'
 import Botones from '../componentes/Botones'
 import Controlador from '../componentes/Controlador'
@@ -38,18 +38,22 @@ const App = () => {
   const bankTwo = bank.bankTwo;
   let Bank = "";
 
-  const handleKey = (e) =>{
-    if(e.keyCode === 13) { 
-      console.log(e)
-    }
-  }
+  // const handleKey = (e) =>{
+  //   if(e.keyCode === 81||87||69||65||83||68||90||88||67) { 
+  //     console.log(e.keyCode);
+  //     _handleSound()
+  //   }
+  // }
+  // useEffect(() => {
+  //   window.onkeydown= handleKey;
+  // }, [])
 
   const _renderButtons = () =>{
     
     tablero.tableroSonido === true? Bank = bankTwo: Bank= bankOne;
     return Bank.map(element => {
         return(
-            <Button lg="3" key={element.key} id={element.id} onClick={()=>_handleSound(element.url)} onKeyDown={handleKey} className="drum-pad">{element.letra}</Button>
+            <Button key={element.key} id={element.id} onClick={()=>_handleSound(element.url)} className="drum-pad">{element.letra}</Button>
         )
     });
   }
