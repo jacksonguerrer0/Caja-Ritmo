@@ -37,23 +37,31 @@ const App = () => {
   const bankOne = bank.bankOne;
   const bankTwo = bank.bankTwo;
   let Bank = "";
-
   // const handleKey = (e) =>{
-  //   if(e.keyCode === 81||87||69||65||83||68||90||88||67) { 
+  //   if(e.keyCode === 81) { 
   //     console.log(e.keyCode);
   //     _handleSound()
   //   }
   // }
   // useEffect(() => {
   //   window.onkeydown= handleKey;
-  // }, [])
+  // },)
 
   const _renderButtons = () =>{
     
     tablero.tableroSonido === true? Bank = bankTwo: Bank= bankOne;
     return Bank.map(element => {
+
+      const handleKey = (e) =>{
+        if(e.keyCode === element.key) { 
+          console.log(e.keyCode);
+          console.log(e)
+        }
+      }
+
+      
         return(
-            <Button key={element.key} id={element.id} onClick={()=>_handleSound(element.url)} className="drum-pad">{element.letra}</Button>
+            <Button key={element.key} id={element.id} onClick={()=>_handleSound(element.url)} className="drum-pad" onKeyDown={() => window.onkeydown= handleKey}>{element.letra}</Button>
         )
     });
   }
