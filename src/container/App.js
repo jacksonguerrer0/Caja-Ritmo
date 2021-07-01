@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Container, Row, Button } from 'react-bootstrap'
 import Botones from '../componentes/Botones'
 import Controlador from '../componentes/Controlador'
@@ -10,7 +10,7 @@ const App = () => {
   const [tablero, setTablero] = useState({tableroSonido: false});
   const [encendido, setEncendido] = useState(false);
   const [volumen, setVolumen] = useState(0.50)
-
+  const [datos, setDatos] = useState([])
 
   const _handleTablero = (e) => {
     const { htmlFor } = e.target
@@ -37,12 +37,16 @@ const App = () => {
   const bankOne = bank.bankOne;
   const bankTwo = bank.bankTwo;
   let Bank = "";
+  
   // const handleKey = (e) =>{
+  //   console.log(e.keyCode)
   //   if(e.keyCode === 81) { 
   //     console.log(e.keyCode);
-  //     _handleSound()
+
+  //     _handleSound(bank.bankOne[0].url)
   //   }
   // }
+
   // useEffect(() => {
   //   window.onkeydown= handleKey;
   // },)
@@ -53,18 +57,21 @@ const App = () => {
     return Bank.map(element => {
 
       const handleKey = (e) =>{
+        console.log(e)
+        console.log("cualquier letra")
+        console.log(element.key)
         if(e.keyCode === element.key) { 
-          console.log(e.keyCode);
-          console.log(e)
+          _handleSound(element.url)
         }
       }
 
       
         return(
-            <Button key={element.key} id={element.id} onClick={()=>_handleSound(element.url)} className="drum-pad" onKeyDown={() => window.onkeydown= handleKey}>{element.letra}</Button>
+            <Button  tabIndex={0}  key={element.key} id={element.id} url={element.url} onClick={()=>_handleSound(element.url)}className="drum-pad" onKeyDown={window.onkeydown= handleKey}  /*evento={()=> handleDatos(element.url, element.letra)}*/>{element.letra}</Button>
         )
     });
   }
+
   const _handleSound = (url) =>{
     if(encendido.checked === true ){
     const sound = new Audio();
@@ -80,7 +87,7 @@ const App = () => {
     <div id="drum-machine">
       <Container>
       <Row id="display">
-          <Botones _renderButtons={_renderButtons}/>
+          <Botones _renderButtons={_renderButtons} />
           <Controlador  _handleTablero={_handleTablero} _handleEncendido={_handleEncendido} volumen={volumen} adjustVolume={adjustVolume}/>
         </Row>
       </Container>

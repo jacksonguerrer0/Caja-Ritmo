@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import {Col} from 'react-bootstrap'
 
 const Botones = (props) => {
@@ -14,10 +14,14 @@ const Botones = (props) => {
     //       this.playSound();
     //     }
     //   }
-
+    // const referenciaBoton = useRef();
+    // const datos = () =>{
+    //     console.log(referenciaBoton.current)
+    // }
+  
     return (
 
-        <Col id="drum-bank" style={{margin: "auto"}}>
+        <Col id="drum-bank"  /*ref={referenciaBoton} onClick={datos}*/ style={{margin: "auto"}}>
             {
                 props._renderButtons()
             }
