@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/interruptor.css'
+import '../styles/interruptor.scss'
 import { Row, Col} from 'react-bootstrap'
 const Controlador = (props) => {
     return (

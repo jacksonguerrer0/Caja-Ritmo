@@ -3,7 +3,7 @@ import { Container, Row, Button } from 'react-bootstrap'
 import Botones from '../componentes/Botones'
 import Controlador from '../componentes/Controlador'
 import bank from '../sound/bank.json'
-import '../styles/app.css'
+import '../styles/app.scss'
 const App = () => {
 
 
@@ -59,9 +59,11 @@ const App = () => {
       const handleKey = (e) =>{
         console.log(e)
         console.log("cualquier letra")
+        console.log(element)
         console.log(element.key)
         if(e.keyCode === element.key) { 
           _handleSound(element.url)
+
         }
       }
 
@@ -85,12 +87,12 @@ const App = () => {
   }
   return (
     <div id="drum-machine">
-      <Container>
+      <div>
       <Row id="display">
           <Botones _renderButtons={_renderButtons} />
           <Controlador  _handleTablero={_handleTablero} _handleEncendido={_handleEncendido} volumen={volumen} adjustVolume={adjustVolume}/>
         </Row>
-      </Container>
+      </div>
     </div>
   )
 }
