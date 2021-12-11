@@ -1,40 +1,52 @@
 import React from 'react'
 import '../styles/interruptor.scss'
-import { Row, Col} from 'react-bootstrap'
-const Controlador = (props) => {
+import {  Col} from 'react-bootstrap'
+import db from '../sound/bank.json'
+const Controlador = ({setVolumen, setMode, setEncendido, volumen }) => {
+
+    const _handleEncendido = (e) => {
+        const { checked } = e.target;
+        setEncendido(checked)
+      }
+    
+    const _handleTablero = (e) => {
+        const { checked } = e.target
+        // console.log(checked)
+        if(checked) setMode(db.bankTwo)
+        else setMode(db.bankOne)
+    }
+    const adjustVolume = (e) =>{
+        setVolumen(e.target.value)
+    }
     return (
         <Col>
             <h1>Jackson Guerrero</h1>
             <Col>
                 <h4>Power</h4>
                 <label className="switch">
-                <input type="checkbox" onChange={props._handleEncendido}/>
+                <input type="checkbox" onChange={_handleEncendido}/>
                 <div className="slider round"></div>
                 </label>
             </Col>
 
             <Col className='volume-slider'>
-                <h4>Volumen {Math.floor(props.volumen*10)}</h4>
+                <h4>Volumen {Math.floor(volumen*10)}</h4>
                 <input
                 max='1'
                 min='0'
-                onChange={props.adjustVolume}
+                onChange={adjustVolume}
                 step='0.01'
                 type='range'
-                value={props.volumen}
+                value={volumen}
                 />
             </Col>
 
             <Col >
             <h4>Modo</h4>
-                <input type="radio" name="interruptor" id="prendido"/>
-	            <input type="radio" name="interruptor" id="apagado" />
-                <div className="interruptor-cuerpo" style={{margin: "auto"}}>
-                    <div className="interruptor-tecla">
-                        <label htmlFor="prendido" title="Desactivado" onMouseDown={props._handleTablero}>___</label>
-                        <label htmlFor="apagado" title="Activado" onMouseDown={props._handleTablero}>___</label>
-                    </div>		
-                </div>
+            <label className="switch">
+                <input type="checkbox" onChange={_handleTablero}/>
+                <div className="slider round"></div>
+            </label>
             </Col>
         </Col>
     )
